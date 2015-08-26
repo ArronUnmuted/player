@@ -1,0 +1,20 @@
+{
+  "name": "player",
+  "version": "0.0.1",
+  "description": "A simple player with now playing info",
+  "dependencies": {
+    "bootstrap": "~3.3.5",
+    "angular": "~1.4.2",
+    "angular-animate": "~1.4.2",
+    "fontawesome": "~4.3.0",
+    "angular-fontawesome": "~0.3.2",
+    "angular-strap": "~2.2.1",
+    "angular-motion": "~0.4.2",
+    "angular-sanitize": "~1.4.2",
+    "bootstrap-additions": "~0.3.1",
+    "angular-mocks": "~1.4.4"
+  },
+  "resolutions": {
+    "angular": "~1.4.0"
+  }
+}

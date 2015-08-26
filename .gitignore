@@ -1,0 +1,7 @@
+.c9/
+__MACOSX/
+.tmp/
+*~
+dev/
+node_modules/
+src/libs/

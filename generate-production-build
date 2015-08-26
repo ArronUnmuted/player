@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+git checkout prod
+git merge test --no-ff
+
+grunt
+git add -A
+git commit -m "Generate production build"
+
+echo "− done, don't forget to tag and deploy"
