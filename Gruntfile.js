@@ -212,8 +212,6 @@ module.exports = function (grunt) {
                         'src/libs/angular-mocks/angular-mocks.js',
                         'src/libs/angular-animate/angular-animate.js',
                         'src/libs/angular-sanitize/angular-sanitize.js',
-                        'src/libs/angular-strap/dist/angular-strap.js',
-                        'src/libs/angular-strap/dist/angular-strap.tpl.js',
                         'src/libs/angular-fontawesome/dist/angular-fontawesome.js',
                         'dev/app/00-templates.js',
                         'dev/app/**.js',
