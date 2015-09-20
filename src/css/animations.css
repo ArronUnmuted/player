@@ -1,0 +1,34 @@
+@keyframes slow-flash {
+  0%, 50%, 100% {
+    opacity: 1;
+  }
+
+  25%, 75% {
+    opacity: 0;
+  }
+}
+
+.slow-flash {
+    animation-name: slow-flash;
+    animation-iteration-count: infinite;
+    animation-duration: 2s;
+}
+
+.flash-text {
+    animation-name: slow-flash;
+    animation-iteration-count: 1;
+    animation-duration: 2s;
+}
+
+[animate-on-change] {
+    transition: all 0.2s linear;
+    opacity: 1;
+}
+
+[animate-on-change].changed-add {
+    opacity: 0;
+}
+
+[animate-on-change].changed {
+    opacity: 1;
+}

@@ -1,0 +1,72 @@
+@media screen and (max-height: 99px) {
+    .box-action-bar,
+    .box-central,
+    .box-last-songs {
+        display: none;
+    }
+
+    .box-bottom-bar {
+        flex: 1;
+    }
+}
+
+@media screen and (max-height: 299px) {
+    .box-action-bar,
+    .box-central {
+        display: none;
+    }
+}
+
+@media screen and (max-height: 499px) {
+    .box-action-bar,
+    .logo {
+        display: none;
+    }
+
+    .current-album-art {
+        max-width: 100%;
+    }
+}
+
+@media screen and (min-height: 500px) {
+    .box-action-bar,
+    .box-bottom-bar,
+    .box-last-songs {
+        min-height: 60px;
+    }
+    .current-album-art {
+        max-width: 300px;
+        max-height: 300px;
+        width: auto;
+        height: auto;
+    }
+    .album-art {
+        max-width: 100px;
+        max-height: 100px;
+        width: auto;
+        height: auto;
+    }
+    .box-last-songs {
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+    .box-central .logo-container {
+        flex: 1;
+        max-width: 300px;
+        max-height: 300px;
+        display: block;
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+    .box-central .logo-container img,
+    .box-central .current-art-container img {
+        width: 100%;
+    }
+    .box-central .current-art-container {
+        flex: 1;
+        max-width: 150px;
+        max-height: 150px;
+        display: block;
+        margin-bottom: 30px;
+    }
+}

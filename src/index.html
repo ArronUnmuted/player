@@ -4,26 +4,70 @@
   <meta charset="utf-8">
   <title>Player</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <base href="/">
   <link data-noprefix href="https://fonts.googleapis.com/css?family=Roboto:400" rel="stylesheet">
   <!-- build:css css/player.min.css -->
   <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.css">
   <link rel="stylesheet" href="libs/fontawesome/css/font-awesome.css">
   <link rel="stylesheet" href="css/animations.css">
   <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/helpers.css">
   <link rel="stylesheet" href="css/fixes.css">
   <link rel="stylesheet" href="css/spinner.css">
   <!-- endbuild -->
 </head>
-<body>
-<!-- Content -->
+<body ng-controller="PlayerCtrl as ctrl" ng-cloak>
+
+<div id="main-container">
+<div id="content">
+<!-- Top bar -->
+<div class="box box-{{ctrl.theme}} box-valign-center box-action-bar" ng-show="ctrl.state === ctrl.states.loaded" ng-style="{ background: ctrl.shadedBackgroundColour }">
+  <a ng-repeat="button in ctrl.config.buttons" ng-href="{{button.url}}" class="link-button" ng-style="{ color: ctrl.config.tint }"><i class="fa {{button.icon}}"></i></a>
+</div>
+
+<!-- Central box -->
+<div class="box box-{{ctrl.theme}} box-central box-valign-center" ng-show="ctrl.state === ctrl.states.loaded" ng-style="{background: ctrl.config.backgroundColour}">
+  <div class="logo-container">
+    <img ng-src="{{ctrl.config.logo}}" class="logo">
+  </div>
+  <div class="current-art-container">
+    <img ng-if="ctrl.songs[0]" ng-src="{{ctrl.songs[0].url}}" class="current-album-art">
+  </div>
+</div>
+
+<!-- Error box -->
+<div class="box box-error" ng-show="ctrl.state === ctrl.states.error">
+<p class="text-danger">Failed to load the config.</p>
+</div>
+
+<!-- Loading box -->
+<div class="box box-loading box-valign-center" ng-show="ctrl.state === ctrl.states.loading">
+    <spinner></spinner>
+</div>
+
+<!-- Bottom bar -->
+<div class="box box-{{ctrl.theme}} box-valign-center box-bottom-bar" ng-show="ctrl.state === ctrl.states.loaded" ng-style="{background: ctrl.shadedBackgroundColour}">
+  <span class="bottom-bar-message" ng-class="{'flash-text': ctrl.shouldFlashMessage}">
+    <span class="long-text" animate-on-change="ctrl.bottomBarMessage"><span ng-show="ctrl.shouldFlashMessage"><i class="fa fa-warning"></i>&nbsp;</span>{{ctrl.bottomBarMessage}}</span>
+  </span>
+
+  <button title="Click to play/stop the stream" type="button" class="play-stop-button" ng-click="ctrl.player.toggle(ctrl.config.streamUrl)"><i class="fa" ng-class="{'fa-play': (ctrl.player.state === ctrl.player.states.stopped || ctrl.player.state === ctrl.player.states.buffering), 'fa-stop': (ctrl.player.state === ctrl.player.states.playing), 'slow-flash': (ctrl.player.state === ctrl.player.states.buffering)}" ng-style="{color: ctrl.config.tint}"></i></button>
+</div>
+
+<!-- Last songs -->
+<div class="box box-{{ctrl.theme}} box-valign-center box-last-songs" ng-show="ctrl.state === ctrl.states.loaded" ng-style="{background: ctrl.config.backgroundColour}">
+  <img ng-repeat="song in ctrl.songs|limitTo:10:1" ng-src="{{song.url}}" class="album-art">
+</div>
+<!-- End of content -->
+</div>
+</div>
 
 <!-- build:js js/player.min.js -->
 <script src="libs/angular/angular.js"></script>
-<script src="libs/angular-route/angular-route.js"></script>
 <script src="libs/angular-animate/angular-animate.js"></script>
 <script src="libs/angular-sanitize/angular-sanitize.js"></script>
-<script src="libs/angular-fontawesome/dist/angular-fontawesome.js"></script>
+<script src="https://np-rt.innovatete.ch/socket.io/socket.io.js"></script>
 <!-- include: "type": "js", "files": ["*.js", "*/**.js", "*/*/**.js", "*/*/*/**.js"] -->
 <!-- endbuild -->
 </body>
