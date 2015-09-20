@@ -116,35 +116,17 @@ angular.module("player").controller("PlayerCtrl", function ($timeout, $location,
     };
 
     // TODO: Fix CORS which currently does not work and check the data format
-    let socket = io.connect("https://np-rt.innovatete.ch");
+    let socket = io.connect("http://212.47.231.190/");
+    
     ctrl.songs = [];
-    socket.emit("username", username);
+    
+    socket.emit("subscribe", username);
     socket.on("metadata", (data) => {
         ctrl.songs = data;
+        initBottomBarMessage()
+        $scope.$apply();
     });
-
-    // ctrl.songs = [
-    //     {
-    //         url: "https://placeholdit.imgix.net/~text?txtsize=48&txt=512%C3%97512&w=512&h=512",
-    //         artist: "Test Artist",
-    //         song: "This is my song",
-    //     },
-    //     {
-    //         url: "https://placeholdit.imgix.net/~text?txtsize=48&txt=512%C3%97512&w=512&h=512",
-    //         artist: "Test Artist",
-    //         song: "This is my song",
-    //     },
-    //     {
-    //         url: "https://placeholdit.imgix.net/~text?txtsize=48&txt=512%C3%97512&w=512&h=512",
-    //         artist: "Test Artist",
-    //         song: "This is my song",
-    //     },
-    //     {
-    //         url: "https://placeholdit.imgix.net/~text?txtsize=48&txt=512%C3%97512&w=512&h=512",
-    //         artist: "Test Artist",
-    //         song: "This is my song",
-    //     },
-    // ];
+    console.log(socket)
 
     initBottomBarMessage();
 });

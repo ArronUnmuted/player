@@ -23,7 +23,7 @@
 <div id="content">
 <!-- Top bar -->
 <div class="box box-{{ctrl.theme}} box-valign-center box-action-bar" ng-show="ctrl.state === ctrl.states.loaded" ng-style="{ background: ctrl.shadedBackgroundColour }">
-  <a ng-repeat="button in ctrl.config.buttons" ng-href="{{button.url}}" class="link-button" ng-style="{ color: ctrl.config.tint }"><i class="fa {{button.icon}}"></i></a>
+  <a ng-repeat="button in ctrl.config.buttons" ng-href="{{button.url}}" class="link-button" style="font-size: 30px;" ng-style="{ color: ctrl.config.tint }"><i class="fa {{button.icon}}"></i></a>
 </div>
 
 <!-- Central box -->
@@ -32,7 +32,7 @@
     <img ng-src="{{ctrl.config.logo}}" class="logo">
   </div>
   <div class="current-art-container">
-    <img ng-if="ctrl.songs[0]" ng-src="{{ctrl.songs[0].url}}" class="current-album-art">
+    <img ng-if="ctrl.songs[0]" ng-src="{{ctrl.songs[0].cover}}" class="current-album-art">
   </div>
 </div>
 
@@ -57,7 +57,7 @@
 
 <!-- Last songs -->
 <div class="box box-{{ctrl.theme}} box-valign-center box-last-songs" ng-show="ctrl.state === ctrl.states.loaded" ng-style="{background: ctrl.config.backgroundColour}">
-  <img ng-repeat="song in ctrl.songs|limitTo:10:1" ng-src="{{song.url}}" class="album-art">
+  <img ng-repeat="song in ctrl.songs|limitTo:5" ng-src="{{song.cover}}" class="album-art">
 </div>
 <!-- End of content -->
 </div>
@@ -67,7 +67,7 @@
 <script src="libs/angular/angular.js"></script>
 <script src="libs/angular-animate/angular-animate.js"></script>
 <script src="libs/angular-sanitize/angular-sanitize.js"></script>
-<script src="https://np-rt.innovatete.ch/socket.io/socket.io.js"></script>
+<script src="http://212.47.231.190/socket.io/socket.io.js"></script>
 <!-- include: "type": "js", "files": ["*.js", "*/**.js", "*/*/**.js", "*/*/*/**.js"] -->
 <!-- endbuild -->
 </body>
