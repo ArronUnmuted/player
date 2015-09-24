@@ -2,7 +2,7 @@
 <html lang="en" ng-app="player">
 <head>
   <meta charset="utf-8">
-  <title>Player</title>
+  <title ng-bind="pageTitle || 'Player'"></title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <base href="/">
   <link data-noprefix href="https://fonts.googleapis.com/css?family=Roboto:400" rel="stylesheet">
@@ -23,7 +23,7 @@
 <div id="content">
 <!-- Top bar -->
 <div class="box box-{{ctrl.theme}} box-valign-center box-action-bar" ng-show="ctrl.state === ctrl.states.loaded" ng-style="{ background: ctrl.shadedBackgroundColour }">
-  <a ng-repeat="button in ctrl.config.buttons" ng-href="{{button.url}}" class="link-button" style="font-size: 30px;" ng-style="{ color: ctrl.config.tint }"><i class="fa {{button.icon}}"></i></a>
+  <a ng-repeat="button in ctrl.config.buttons" ng-href="{{button.url}}" class="link-button" style="font-size: 30px;" ng-style="{ color: ctrl.config.tint }" target="_blank"><i class="fa {{button.icon}}"></i></a>
 </div>
 
 <!-- Central box -->
@@ -67,7 +67,7 @@
 <script src="libs/angular/angular.js"></script>
 <script src="libs/angular-animate/angular-animate.js"></script>
 <script src="libs/angular-sanitize/angular-sanitize.js"></script>
-<script src="http://212.47.231.190/socket.io/socket.io.js"></script>
+<script src="https://np-rt.innovatete.ch/socket.io/socket.io.js"></script>
 <!-- include: "type": "js", "files": ["*.js", "*/**.js", "*/*/**.js", "*/*/*/**.js"] -->
 <!-- endbuild -->
 </body>

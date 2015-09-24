@@ -1,4 +1,4 @@
-angular.module("player").controller("PlayerCtrl", function ($timeout, $location, $scope, ConfigService) {
+angular.module("player").controller("PlayerCtrl", function ($rootScope,$timeout, $location, $scope, ConfigService) {
     let ctrl = this;
 
     ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -53,6 +53,13 @@ angular.module("player").controller("PlayerCtrl", function ($timeout, $location,
         let lightenOrDarken = (ctrl.getTheme(ctrl.config.backgroundColour, 64) === "light") ? -1 : 1;
         ctrl.shadedBackgroundColour = ctrl.shadeColour(ctrl.config.backgroundColour,
             shadeMultiplier * lightenOrDarken);
+            
+        if (ctrl.config.autoPlay){
+            ctrl.player.toggle(ctrl.config.streamUrl)
+        }
+        
+        $rootScope.pageTitle=ctrl.config.name
+        
     }, function onFail() {
         ctrl.state = ctrl.states.error;
     });
@@ -116,7 +123,7 @@ angular.module("player").controller("PlayerCtrl", function ($timeout, $location,
     };
 
     // TODO: Fix CORS which currently does not work and check the data format
-    let socket = io.connect("http://212.47.231.190/");
+    let socket = io.connect("https://np-rt.innovatete.ch/");
     
     ctrl.songs = [];
     
@@ -126,7 +133,6 @@ angular.module("player").controller("PlayerCtrl", function ($timeout, $location,
         initBottomBarMessage()
         $scope.$apply();
     });
-    console.log(socket)
 
     initBottomBarMessage();
 });
