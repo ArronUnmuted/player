@@ -1,4 +1,5 @@
 let player = angular.module("player", [
+    "templates",
     "ngAnimate",
     "ngSanitize",
 ]);

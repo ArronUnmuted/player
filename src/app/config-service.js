@@ -1,4 +1,4 @@
-angular.module("player").factory("ConfigService", function ($http, $q) {
+angular.module("player").factory("ConfigService", function ($http) {
     let ConfigService = {
         getConfig(username) {
             return $http

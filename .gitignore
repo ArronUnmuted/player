@@ -2,6 +2,7 @@
 __MACOSX/
 .tmp/
 *~
+dist/
 dev/
 node_modules/
 src/libs/

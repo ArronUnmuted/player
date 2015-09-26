@@ -1,6 +1,6 @@
 {
   "name": "player",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "A simple player with now playing info",
   "devDependencies": {
     "autoprefixer": "^6.0.3",

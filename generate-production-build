@@ -5,6 +5,7 @@ set -e
 git checkout prod
 git merge test --no-ff
 
+bower install
 grunt
 git add -A
 git commit -m "Generate production build"

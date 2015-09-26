@@ -91,7 +91,7 @@ module.exports = function (grunt) {
                 },
             },
             build: {
-                src: ["dist/app/*/**.html", "dist/app/*/*/**.html", "dist/app/*/*/*/**.html"],
+                src: ["dist/app/**.html", "dist/app/*/**.html", "dist/app/*/*/**.html", "dist/app/*/*/*/**.html"],
                 dest: "dist/app/00-templates.js",
                 options: {
                     base: "dist",
@@ -102,7 +102,7 @@ module.exports = function (grunt) {
                 },
             },
             dev: {
-                src: ["src/app/*/**.html", "src/app/*/*/**.html", "src/app/*/*/*/**.html"],
+                src: ["src/app/**.html", "src/app/*/**.html", "src/app/*/*/**.html", "src/app/*/*/*/**.html"],
                 dest: "dev/app/00-templates.js",
                 options: {
                     base: "src",
@@ -248,7 +248,7 @@ module.exports = function (grunt) {
                 map: false,
                 processors: [
                     require("pixrem")(), // add fallbacks for rem units
-                    require("autoprefixer")({ browsers: 'last 2 versions' }),
+                    require("autoprefixer")({ browsers: "last 2 versions" }),
                 ],
             },
             build: {
@@ -329,7 +329,7 @@ module.exports = function (grunt) {
             "html2js:dev",
             "babel:dev",
             "eslint",
-            "karma",
+            // "karma",
         ]);
     });
 
