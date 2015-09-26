@@ -3,7 +3,7 @@
 set -e
 
 git checkout prod
-git merge test --no-ff
+git merge dev --no-ff
 
 bower install
 grunt
