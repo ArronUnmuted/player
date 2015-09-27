@@ -71,4 +71,8 @@
         display: block;
         margin-bottom: 30px;
     }
+    .logo{
+        max-height:7em;
+        width: auto !important;
+    }
 }
