@@ -1,4 +1,4 @@
-angular.module("player").directive("animateOnChange", function ($animate, $timeout) {
+angular.module("player").directive("animateOnChange", ($animate, $timeout) => {
     return (scope, element, attr) => {
         scope.$watch(attr.animateOnChange, (newValue, oldValue) => {
             if (newValue === oldValue) {

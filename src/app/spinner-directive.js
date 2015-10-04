@@ -1,4 +1,4 @@
-angular.module("player").directive("spinner", function () {
+angular.module("player").directive("spinner", () => {
     return {
         restrict: "E",
         replace: true,

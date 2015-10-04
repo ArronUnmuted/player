@@ -4,6 +4,6 @@ let player = angular.module("player", [
     "ngSanitize",
 ]);
 
-player.config(function ($locationProvider) {
+player.config(($locationProvider) => {
     $locationProvider.html5Mode(true);
 });

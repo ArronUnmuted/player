@@ -1,11 +1,15 @@
-angular.module("player").controller("PlayerCtrl", function ($rootScope, $timeout, $location, $scope, ConfigService) {
-    let ctrl = this;
+angular.module("player").controller("PlayerCtrl", function (
+    $rootScope,
+    $timeout,
+    $location,
+    $scope,
+    ConfigService) {
 
     ///////////////////////////////////////////////////////////////////////////////////////////////
     // Config
     ///////////////////////////////////////////////////////////////////////////////////////////////
 
-    ctrl.shadeColour = function (color, percent) {
+    this.shadeColour = (color, percent) => {
         // from http://stackoverflow.com/a/13542669/1636285, with minor changes
         // pass a negative number to darken, positive to lighten
         let f = parseInt(color.slice(1), 16);
@@ -17,7 +21,7 @@ angular.module("player").controller("PlayerCtrl", function ($rootScope, $timeout
         return "#" + (0x1000000 + (Math.round((t - R) * p) + R) * 0x10000 + (Math.round((t - G) * p) + G) * 0x100 + (Math.round((t - B) * p) + B)).toString(16).slice(1);
     };
 
-    ctrl.getTheme = function (backgroundColour, threshold = 128) {
+    this.getTheme = (backgroundColour, threshold = 128) => {
         let r;
         let g;
         let b;
@@ -34,72 +38,72 @@ angular.module("player").controller("PlayerCtrl", function ($rootScope, $timeout
         }
     };
 
-    ctrl.states = {
+    this.states = {
         loading: 0,
         loaded: 1,
         error: 2,
     };
 
-    ctrl.state = ctrl.states.loading;
+    this.state = this.states.loading;
 
     let initialise = (config) => {
-        ctrl.state = ctrl.states.loaded;
-        ctrl.config = config;
-        ctrl.theme = ctrl.getTheme(ctrl.config.backgroundColour);
+        this.state = this.states.loaded;
+        this.config = config;
+        this.theme = this.getTheme(this.config.backgroundColour);
 
         const shadeMultiplier = 0.15;
-        let lightenOrDarken = (ctrl.getTheme(ctrl.config.backgroundColour, 64) === "light") ? -1 : 1;
-        ctrl.shadedBackgroundColour = ctrl.shadeColour(ctrl.config.backgroundColour,
+        let lightenOrDarken = (this.getTheme(this.config.backgroundColour, 64) === "light") ? -1 : 1;
+        this.shadedBackgroundColour = this.shadeColour(this.config.backgroundColour,
             shadeMultiplier * lightenOrDarken);
 
-        if (ctrl.config.autoPlay) {
-            ctrl.player.toggle(ctrl.config.streamUrl);
+        if (this.config.autoPlay) {
+            this.player.toggle(this.config.streamUrl);
         }
 
-        $rootScope.pageTitle = ctrl.config.name;
+        $rootScope.pageTitle = this.config.name;
     };
 
     let username = $location.search().username;
 
-    ConfigService.getConfig(username).then(initialise, () => ctrl.state = ctrl.states.error);
+    ConfigService.getConfig(username).then(initialise, () => this.state = this.states.error);
 
     ///////////////////////////////////////////////////////////////////////////////////////////////
     // Player
     ///////////////////////////////////////////////////////////////////////////////////////////////
 
     let audio;
-    ctrl.player = {};
-    ctrl.player.states = { stopped: 0, buffering: 1, playing: 2 };
-    ctrl.player.state = ctrl.player.states.stopped;
+    this.player = {};
+    this.player.states = { stopped: 0, buffering: 1, playing: 2 };
+    this.player.state = this.player.states.stopped;
 
-    ctrl.player.toggle = function (streamUrl) {
-        if (ctrl.player.state === ctrl.player.states.buffering) {
+    this.player.toggle = (streamUrl) => {
+        if (this.player.state === this.player.states.buffering) {
             return;
         }
-        if (ctrl.player.state === ctrl.player.states.playing && audio !== null) {
+        if (this.player.state === this.player.states.playing && audio !== null) {
             audio.removeEventListener("error");
             audio.pause();
             audio.src = "";
             audio = null;
-            ctrl.player.state = ctrl.player.states.stopped;
+            this.player.state = this.player.states.stopped;
             return;
         }
         audio = new Audio(streamUrl);
         audio.play();
-        audio.addEventListener("playing", function () {
-            ctrl.player.state = ctrl.player.states.playing;
+        audio.addEventListener("playing", () => {
+            this.player.state = this.player.states.playing;
             $scope.$apply();
         });
-        audio.addEventListener("error", function () {
+        audio.addEventListener("error", () => {
             /* global MediaError */
             if (audio.error.code !== MediaError.MEDIA_ERR_ABORTED) {
                 flashMessage("Failed to play the stream.");
             }
-            ctrl.player.state = ctrl.player.states.stopped;
+            this.player.state = this.player.states.stopped;
             audio = null;
             $scope.$apply();
         });
-        ctrl.player.state = ctrl.player.states.buffering;
+        this.player.state = this.player.states.buffering;
     };
 
     ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -107,8 +111,8 @@ angular.module("player").controller("PlayerCtrl", function ($rootScope, $timeout
     ///////////////////////////////////////////////////////////////////////////////////////////////
 
     let flashMessage = (message, durationInSeconds = 5) => {
-        ctrl.bottomBarMessage = message;
-        ctrl.shouldFlashMessage = true;
+        this.bottomBarMessage = message;
+        this.shouldFlashMessage = true;
         $timeout(initBottomBarMessage, durationInSeconds * 1000);
     };
 
@@ -117,17 +121,17 @@ angular.module("player").controller("PlayerCtrl", function ($rootScope, $timeout
     };
 
     let initBottomBarMessage = () => {
-        ctrl.bottomBarMessage = (ctrl.songs[0]) ? formatSong(ctrl.songs[0]) : "";
-        ctrl.shouldFlashMessage = false;
+        this.bottomBarMessage = (this.songs[0]) ? formatSong(this.songs[0]) : "";
+        this.shouldFlashMessage = false;
     };
 
     let socket = io.connect("https://np-rt.innovatete.ch/");
 
-    ctrl.songs = [];
+    this.songs = [];
 
     socket.emit("subscribe", username);
     socket.on("metadata", (data) => {
-        ctrl.songs = data;
+        this.songs = data;
         initBottomBarMessage();
         $scope.$apply();
     });
