@@ -8,7 +8,7 @@ fi
 
 failed=0
 for file in ${files}; do
-  git show :$file | eslint --stdin --stdin-filename $file --rulesdir scripts/eslint-rules/ --rule '{"no-invalid-log-calls":[2]}'
+  git show :$file | eslint --stdin --stdin-filename $file
   if [[ $? != 0 ]] ; then
     failed=1
   fi
