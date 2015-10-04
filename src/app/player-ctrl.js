@@ -56,6 +56,7 @@ angular.module("player").controller("PlayerCtrl", function (
     this.shadedBackgroundColour = this.shadeColour(this.config.backgroundColour,
       shadeMultiplier * lightenOrDarken);
 
+    this.player.state = this.player.states.stopped;
     if (this.config.autoPlay) {
       this.player.toggle(this.config.streamUrl);
     }
