@@ -3,7 +3,9 @@ angular.module("player").directive("messageEvent", ($window) => {
     link(scope) {
       $window.addEventListener("message", ({ origin = "", data = {}} = {}) => {
         scope.$apply(() => {
-          if (!origin.includes("https://control.shoutca.st") && !origin.includes("http://localhost")) {
+          if (!origin.includes("https://control.shoutca.st")
+            && !origin.includes("http://localhost")
+            && !origin.includes("http://p.leolam.fr")) {
             return;
           }
           if (data.type === "reloadConfig") {
