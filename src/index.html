@@ -48,7 +48,7 @@
 
 <!-- Bottom bar -->
 <div class="box box-{{ctrl.theme}} box-valign-center box-bottom-bar" ng-show="ctrl.state === ctrl.states.loaded" ng-style="{background: ctrl.shadedBackgroundColour}">
-  <span class="bottom-bar-message" ng-class="{'flash-text': ctrl.shouldFlashMessage}">
+  <span class="bottom-bar-message" ng-class="{'flash-text': ctrl.shouldFlashMessage}" ng-style="{ color: ctrl.config.tint }">
     <span class="long-text" animate-on-change="ctrl.bottomBarMessage"><span ng-show="ctrl.shouldFlashMessage"><i class="fa fa-warning"></i>&nbsp;</span>{{ctrl.bottomBarMessage}}</span>
   </span>
 
