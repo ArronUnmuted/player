@@ -1,8 +1,8 @@
-angular.module("player").directive("messageEvent", ($window, $scope) => {
+angular.module("player").directive("messageEvent", ($window) => {
   return {
     link(scope) {
       $window.addEventListener("message", ({ origin = "", data = {}} = {}) => {
-        $scope.$apply(() => {
+        scope.$apply(() => {
           if (!origin.includes("https://control.shoutca.st") && !origin.includes("http://localhost")) {
             return;
           }
