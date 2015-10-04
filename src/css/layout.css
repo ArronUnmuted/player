@@ -71,8 +71,10 @@
         display: block;
         margin-bottom: 30px;
     }
-    .logo{
-        max-height:7em;
+    .logo {
+        max-height: 7em;
+    }
+    .logo.square {
         width: auto !important;
     }
 }

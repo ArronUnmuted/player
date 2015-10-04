@@ -56,6 +56,18 @@ angular.module("player").controller("PlayerCtrl", function (
     this.shadedBackgroundColour = this.shadeColour(this.config.backgroundColour,
       shadeMultiplier * lightenOrDarken);
 
+    // Determine the image's aspect ratio.
+    // If the image is nearly square, then apply the CSS class square to it
+    // in order to fix display issues.
+    let logo = new Image();
+    logo.onload = () => {
+      let ratio = logo.width / logo.height;
+      if (ratio >= 0.9 && ratio <= 1.1) {
+        this.logoClass = "square";
+      }
+    };
+    logo.src = this.config.logo;
+
     this.player.state = this.player.states.stopped;
     if (this.config.autoPlay) {
       this.player.toggle(this.config.streamUrl);
