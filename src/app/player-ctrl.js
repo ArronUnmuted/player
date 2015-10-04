@@ -42,9 +42,7 @@ angular.module("player").controller("PlayerCtrl", function ($rootScope, $timeout
 
     ctrl.state = ctrl.states.loading;
 
-    let username = $location.search().username;
-
-    ConfigService.getConfig(username).then(function (config) {
+    let initialise = (config) => {
         ctrl.state = ctrl.states.loaded;
         ctrl.config = config;
         ctrl.theme = ctrl.getTheme(ctrl.config.backgroundColour);
@@ -59,10 +57,11 @@ angular.module("player").controller("PlayerCtrl", function ($rootScope, $timeout
         }
 
         $rootScope.pageTitle = ctrl.config.name;
+    };
 
-    }, function onFail() {
-        ctrl.state = ctrl.states.error;
-    });
+    let username = $location.search().username;
+
+    ConfigService.getConfig(username).then(initialise, () => ctrl.state = ctrl.states.error);
 
     ///////////////////////////////////////////////////////////////////////////////////////////////
     // Player
