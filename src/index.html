@@ -32,7 +32,7 @@
     <img ng-src="{{ctrl.config.logo}}" class="logo {{ctrl.logoClass}}">
   </div>
   <div class="current-art-container">
-    <img ng-if="ctrl.songs[0]" ng-src="{{ctrl.songs[0].cover}}" class="current-album-art">
+    <img ng-if="ctrl.songs[0]" ng-src="{{ctrl.songs[0].cover}}?w=600" class="current-album-art">
   </div>
 </div>
 
@@ -57,7 +57,7 @@
 
 <!-- Last songs -->
 <div class="box box-{{ctrl.theme}} box-valign-center box-last-songs" ng-show="ctrl.state === ctrl.states.loaded" ng-style="{background: ctrl.config.backgroundColour}">
-  <img ng-repeat="song in ctrl.songs|limitTo:5" ng-src="{{song.cover}}" class="album-art">
+  <img ng-repeat="song in ctrl.songs|limitTo:5" ng-src="{{song.cover}}?w=200" class="album-art">
 </div>
 <!-- End of content -->
 </div>

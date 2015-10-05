@@ -50,6 +50,7 @@ angular.module("player").controller("PlayerCtrl", function (
     this.state = this.states.loaded;
     this.config = config;
     this.theme = this.getTheme(this.config.backgroundColour);
+    this.config.logo= "https://photon.shoutca.st/"+this.config.logo.replace("https://","").replace("http://","");
 
     const shadeMultiplier = 0.15;
     let lightenOrDarken = (this.getTheme(this.config.backgroundColour, 64) === "light") ? -1 : 1;
@@ -66,7 +67,7 @@ angular.module("player").controller("PlayerCtrl", function (
         this.logoClass = "square";
       }
     };
-    logo.src = this.config.logo;
+    logo.src = this.config.logo
 
     this.player.state = this.player.states.stopped;
     if (this.config.autoPlay) {
@@ -150,6 +151,11 @@ angular.module("player").controller("PlayerCtrl", function (
 
   socket.emit("subscribe", username);
   socket.on("metadata", (data) => {
+    for (var id in data){
+      if (data.hasOwnProperty(id)){
+        data[id].cover="https://photon.shoutca.st/"+data[id].cover.replace("https://","").replace("http://","")
+      }
+    }
     this.songs = data;
     initBottomBarMessage();
     $scope.$apply();
