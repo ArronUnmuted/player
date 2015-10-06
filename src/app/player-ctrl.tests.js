@@ -64,6 +64,16 @@ describe("PlayerCtrl", function () {
       delete config.logo;
       expect(() => scope.ctrl.initialise(config)).not.toThrow();
     });
+
+    describe("getTheme()", function () {
+      it("should return dark when the background is dark", function () {
+        expect(scope.ctrl.getTheme("#000000")).toBe("dark");
+        expect(scope.ctrl.getTheme("#232a31")).toBe("dark");
+      });
+      it("should return light when the background is light", function () {
+        expect(scope.ctrl.getTheme("#ffffff")).toBe("light");
+      });
+    });
   });
 
 });
