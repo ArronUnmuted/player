@@ -136,11 +136,7 @@ angular.module("player").controller("PlayerCtrl", function (
     $timeout(initBottomBarMessage, durationInSeconds * 1000);
   };
 
-  let formatSong = ({
-    artist, song
-  } = {}) => {
-    return `${artist} - ${song}`;
-  };
+  let formatSong = ({ artist, song } = {}) => `${artist} - ${song}`;
 
   let initBottomBarMessage = () => {
     this.bottomBarMessage = (this.songs[0]) ? formatSong(this.songs[0]) : "";
