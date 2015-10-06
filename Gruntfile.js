@@ -331,7 +331,7 @@ module.exports = function (grunt) {
       "html2js:dev",
       "babel:dev",
       "eslint",
-    // "karma",
+      "karma",
     ]);
   });
 

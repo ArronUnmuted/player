@@ -46,7 +46,7 @@ angular.module("player").controller("PlayerCtrl", function (
 
   this.state = this.states.loading;
 
-  let initialise = (config) => {
+  let initialise = this.initialise = (config) => {
     this.state = this.states.loaded;
     this.config = config;
     this.theme = this.getTheme(this.config.backgroundColour);
