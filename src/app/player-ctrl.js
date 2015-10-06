@@ -50,7 +50,9 @@ angular.module("player").controller("PlayerCtrl", function (
     this.state = this.states.loaded;
     this.config = config;
     this.theme = this.getTheme(this.config.backgroundColour);
-    this.config.logo = "https://photon.shoutca.st/" + this.config.logo.replace("https://", "").replace("http://", "");
+    if (typeof this.config.info === "string") {
+      this.config.logo = "https://photon.shoutca.st/" + this.config.logo.replace(/http(s)?:\/\//, "");
+    }
 
     const shadeMultiplier = 0.15;
     let lightenOrDarken = (this.getTheme(this.config.backgroundColour, 64) === "light") ? -1 : 1;
