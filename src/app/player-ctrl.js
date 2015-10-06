@@ -150,13 +150,13 @@ angular.module("player").controller("PlayerCtrl", function (
   this.songs = [];
 
   socket.emit("subscribe", username);
-  socket.on("metadata", (data) => {
-    for (var id in data) {
-      if (data.hasOwnProperty(id)) {
-        data[id].cover = "https://photon.shoutca.st/" + data[id].cover.replace("https://", "").replace("http://", "");
+  socket.on("metadata", (songs) => {
+    songs.forEach((song) => {
+      if (song.cover) {
+        song.cover = "https://photon.shoutca.st/" + song.cover.replace(/http(s)?:\/\//, "");
       }
-    }
-    this.songs = data;
+    });
+    this.songs = songs;
     initBottomBarMessage();
     $scope.$apply();
   });
