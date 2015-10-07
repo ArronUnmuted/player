@@ -10,7 +10,7 @@ printf "${blue}Copying build to remote server…${reset}\n"
 scp -r dist/ deploy@player-host.shoutca.st:player-${CI_BUILD_REF}
 
 printf "${blue}Removing the backup of the previous production build…${reset}\n"
-ssh deploy@player-host.shoutca.st "mv -rf ~/player.backup || true"
+ssh deploy@player-host.shoutca.st "rm -rf ~/player.backup || true"
 
 printf "${blue}Making a backup of the current production build backup…${reset}\n"
 ssh deploy@player-host.shoutca.st "mv /var/www/html/player ~/player.backup"
