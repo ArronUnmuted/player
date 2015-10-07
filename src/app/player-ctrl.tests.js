@@ -47,6 +47,20 @@ describe("PlayerCtrl", function () {
       expect(() => scope.ctrl.initialise(config)).not.toThrow();
     });
 
+    it("should change the logo URL to use Photon", function () {
+      let config = {
+        name: "OPENcast",
+        autoPlay: false,
+        backgroundColour: "#232a31",
+        logo: "https://cdn.shoutca.st/iOS/opencast/logo.png",
+        streamUrl: "https://opencast.radioca.st/streams/128kbps",
+        tint: "#ffffff",
+        username: "opencast",
+      };
+      expect(() => scope.ctrl.initialise(config)).not.toThrow();
+      expect(scope.ctrl.config.logo).toBe("https://photon.shoutca.st/cdn.shoutca.st/iOS/opencast/logo.png");
+    });
+
     it("should provide a player object", function () {
       expect(scope.ctrl.player).toEqual(jasmine.any(Object));
     });
