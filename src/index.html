@@ -29,7 +29,7 @@
 <!-- Central box -->
 <div class="box box-{{ctrl.theme}} box-central box-valign-center" ng-show="ctrl.state === ctrl.states.loaded" ng-style="{background: ctrl.config.backgroundColour}">
   <div class="logo-container">
-    <img ng-src="{{ctrl.config.logo}}" preload-image class="logo {{ctrl.logoClass}}">
+    <img ng-if="ctrl.config.logo" preload-image ng-src="{{ctrl.config.logo}}" class="logo {{ctrl.logoClass}}">
   </div>
   <div class="current-art-container">
     <img ng-if="ctrl.songs[0]" preload-image fallback-image="{{ctrl.fallbackImageUrl}}" ng-src="{{ctrl.songs[0].cover}}?w=600" class="current-album-art">
