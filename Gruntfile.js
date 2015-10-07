@@ -213,6 +213,7 @@ module.exports = function (grunt) {
             "src/libs/angular-animate/angular-animate.js",
             "src/libs/angular-sanitize/angular-sanitize.js",
             "src/libs/angular-fontawesome/dist/angular-fontawesome.js",
+            "src/libs/angular-preload-image/angular-preload-image.js",
             "dev/app/00-templates.js",
             "dev/app/**.js",
             "dev/app/*/**.js",

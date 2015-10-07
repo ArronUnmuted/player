@@ -162,4 +162,7 @@ angular.module("player").controller("PlayerCtrl", function (
   });
 
   initBottomBarMessage();
+
+  const fallbackImageUrl = "https://photon.shoutca.st/cdn.shoutca.st/noalbum.png?w=200";
+  this.fallbackImageUrl = fallbackImageUrl;
 });

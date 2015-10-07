@@ -29,10 +29,10 @@
 <!-- Central box -->
 <div class="box box-{{ctrl.theme}} box-central box-valign-center" ng-show="ctrl.state === ctrl.states.loaded" ng-style="{background: ctrl.config.backgroundColour}">
   <div class="logo-container">
-    <img ng-src="{{ctrl.config.logo}}" class="logo {{ctrl.logoClass}}">
+    <img ng-src="{{ctrl.config.logo}}" preload-image class="logo {{ctrl.logoClass}}">
   </div>
   <div class="current-art-container">
-    <img ng-if="ctrl.songs[0]" ng-src="{{ctrl.songs[0].cover}}?w=600" class="current-album-art">
+    <img ng-if="ctrl.songs[0]" preload-image fallback-image="{{ctrl.fallbackImageUrl}}" ng-src="{{ctrl.songs[0].cover}}?w=600" class="current-album-art">
   </div>
 </div>
 
@@ -57,7 +57,7 @@
 
 <!-- Last songs -->
 <div class="box box-{{ctrl.theme}} box-valign-center box-last-songs" ng-show="ctrl.state === ctrl.states.loaded" ng-style="{background: ctrl.config.backgroundColour}">
-  <img ng-repeat="song in ctrl.songs|limitTo:5" ng-src="{{song.cover}}?w=200" class="album-art">
+  <img ng-repeat="song in ctrl.songs|limitTo:5" preload-image fallback-image="{{ctrl.fallbackImageUrl}}" ng-src="{{song.cover}}?w=200" class="album-art">
 </div>
 <!-- End of content -->
 </div>
@@ -68,6 +68,7 @@
 <script src="libs/angular/angular.js"></script>
 <script src="libs/angular-animate/angular-animate.js"></script>
 <script src="libs/angular-sanitize/angular-sanitize.js"></script>
+<script src="libs/angular-preload-image/angular-preload-image.js"></script>
 <!-- include: "type": "js", "files": ["*.js", "*/**.js", "*/*/**.js", "*/*/*/**.js"] -->
 <!-- /include -->
 <!-- endbuild -->
