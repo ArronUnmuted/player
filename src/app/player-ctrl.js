@@ -50,7 +50,7 @@ angular.module("player").controller("PlayerCtrl", function (
     this.state = this.states.loaded;
     this.config = config;
     this.theme = this.getTheme(this.config.backgroundColour);
-    if (typeof this.config.info === "string") {
+    if (typeof this.config.logo === "string") {
       this.config.logo = "https://photon.shoutca.st/" + this.config.logo.replace(/http(s)?:\/\//, "");
     }
 
