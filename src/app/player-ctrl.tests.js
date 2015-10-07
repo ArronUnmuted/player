@@ -32,6 +32,35 @@ describe("PlayerCtrl", function () {
       expect(scope.ctrl.state).toEqual(scope.ctrl.states.loading);
     });
 
+    it("should initialise correctly given a correct config", function () {
+      let config = {
+        name: "OPENcast",
+        autoPlay: false,
+        backgroundColour: "#232a31",
+        logo: "https://cdn.shoutca.st/iOS/opencast/logo.png",
+        streamUrl: "https://opencast.radioca.st/streams/128kbps",
+        tint: "#ffffff",
+        username: "opencast",
+      };
+      expect(() => scope.ctrl.initialise(config)).not.toThrow();
+      delete config.logo;
+      expect(() => scope.ctrl.initialise(config)).not.toThrow();
+    });
+
+    it("should change the logo URL to use Photon", function () {
+      let config = {
+        name: "OPENcast",
+        autoPlay: false,
+        backgroundColour: "#232a31",
+        logo: "https://cdn.shoutca.st/iOS/opencast/logo.png",
+        streamUrl: "https://opencast.radioca.st/streams/128kbps",
+        tint: "#ffffff",
+        username: "opencast",
+      };
+      expect(() => scope.ctrl.initialise(config)).not.toThrow();
+      expect(scope.ctrl.config.logo).toBe("https://photon.shoutca.st/cdn.shoutca.st/iOS/opencast/logo.png");
+    });
+
     it("should provide a player object", function () {
       expect(scope.ctrl.player).toEqual(jasmine.any(Object));
     });
@@ -48,21 +77,6 @@ describe("PlayerCtrl", function () {
       it("should have a toggle method", function () {
         expect(scope.ctrl.player.toggle).toEqual(jasmine.any(Function));
       });
-    });
-
-    it("should initialise correctly given a correct config", function () {
-      let config = {
-        name: "OPENcast",
-        autoPlay: false,
-        backgroundColour: "#232a31",
-        logo: "https://cdn.shoutca.st/iOS/opencast/logo.png",
-        streamUrl: "https://opencast.radioca.st/streams/128kbps",
-        tint: "#ffffff",
-        username: "opencast",
-      };
-      expect(() => scope.ctrl.initialise(config)).not.toThrow();
-      delete config.logo;
-      expect(() => scope.ctrl.initialise(config)).not.toThrow();
     });
 
     describe("getTheme()", function () {
