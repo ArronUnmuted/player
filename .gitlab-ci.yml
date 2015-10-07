@@ -1,0 +1,27 @@
+before_script:
+  - npm install
+  - bower install
+
+stages:
+  - test
+  - build
+  - deploy
+
+test:
+  stage: test
+  script:
+    - grunt test
+
+build:
+  stage: build
+  script:
+    - grunt build
+  only:
+    - production
+
+deploy:
+  stage: deploy
+  script:
+    - ./deploy.sh
+  only:
+    - production
