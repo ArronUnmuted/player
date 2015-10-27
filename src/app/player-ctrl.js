@@ -52,12 +52,11 @@ angular.module("player").controller("PlayerCtrl", function (
     this.config = config;
     this.theme = this.getTheme(this.config.backgroundColour);
     if (typeof this.config.logo === "string") {
-      if (this.config.logo.indexOf("photon.shoutca.st") === -1){
+      if (this.config.logo.indexOf("photon.shoutca.st") === -1) {
         this.config.logo = "https://photon.shoutca.st/" + this.config.logo.replace(/http(s)?:\/\//, "");
-      }else{
+      } else {
         this.config.logo = this.config.logo;
       }
-      
     }
 
     const shadeMultiplier = 0.15;
@@ -159,12 +158,11 @@ angular.module("player").controller("PlayerCtrl", function (
   socket.on("metadata", (songs) => {
     songs.forEach((song) => {
       if (song.cover) {
-        if (typeof song.cover === "string" && song.cover.indexOf("photon.shoutca.st") !== -1){
+        if (typeof song.cover === "string" && song.cover.indexOf("photon.shoutca.st") !== -1) {
           song.cover = song.cover;
-        }else{
+        } else {
           song.cover = "https://photon.shoutca.st/" + song.cover.replace(/http(s)?:\/\//, "");
         }
-        
       }
     });
     this.songs = songs;
