@@ -9,7 +9,7 @@
     "fontawesome": "4.x",
     "angular-sanitize": "1.x",
     "angular-mocks": "1.x",
-    "angular-preload-image": "*"
+    "angular-preload-image": "leoetlino/angular-preload-image"
   },
   "resolutions": {
     "angular": "~1.4.0"
