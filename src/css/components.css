@@ -121,6 +121,8 @@ body {
 .bottom-bar-message span.long-text {
     width: 100%;
     display: block;
+    display: -moz-box; /* workaround for Firefox -- unsure why this is needed
+                          TODO: figure out what is wrong */
 }
 
 .logo {
