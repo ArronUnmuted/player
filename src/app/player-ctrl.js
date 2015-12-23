@@ -103,12 +103,27 @@ angular.module("player").controller("PlayerCtrl", function (
   };
   this.player.state = this.player.states.stopped;
 
+  let errorListener = () => {
+    /* global MediaError */
+    if (audio.error.code !== MediaError.MEDIA_ERR_ABORTED) {
+      flashMessage("Failed to play the stream.");
+    }
+    this.player.state = this.player.states.stopped;
+    audio = null;
+    $scope.$apply();
+  };
+  let playingListener = () => {
+    this.player.state = this.player.states.playing;
+    $scope.$apply();
+  };
+
   this.player.toggle = (streamUrl) => {
     if (this.player.state === this.player.states.buffering) {
       return;
     }
     if (this.player.state === this.player.states.playing && audio !== null) {
-      audio.removeEventListener("error");
+      audio.removeEventListener("playing", playingListener);
+      audio.removeEventListener("error", errorListener);
       audio.pause();
       audio.src = "";
       audio = null;
@@ -117,19 +132,8 @@ angular.module("player").controller("PlayerCtrl", function (
     }
     audio = new Audio(streamUrl);
     audio.play();
-    audio.addEventListener("playing", () => {
-      this.player.state = this.player.states.playing;
-      $scope.$apply();
-    });
-    audio.addEventListener("error", () => {
-      /* global MediaError */
-      if (audio.error.code !== MediaError.MEDIA_ERR_ABORTED) {
-        flashMessage("Failed to play the stream.");
-      }
-      this.player.state = this.player.states.stopped;
-      audio = null;
-      $scope.$apply();
-    });
+    audio.addEventListener("playing", playingListener);
+    audio.addEventListener("error", errorListener);
     this.player.state = this.player.states.buffering;
   };
 
