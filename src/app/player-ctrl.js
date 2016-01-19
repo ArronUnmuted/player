@@ -94,6 +94,9 @@ angular.module("player").controller("PlayerCtrl", function (
   // Player
   ///////////////////////////////////////////////////////////////////////////////////////////////
 
+  const ONE_SECOND = 1000;
+  const TIMEOUT = 5 * ONE_SECOND;
+
   let audio;
   this.player = {};
   this.player.states = {
@@ -103,10 +106,13 @@ angular.module("player").controller("PlayerCtrl", function (
   };
   this.player.state = this.player.states.stopped;
 
-  let errorListener = () => {
+  let errorListener = (message) => {
     /* global MediaError */
-    if (audio.error.code !== MediaError.MEDIA_ERR_ABORTED) {
-      flashMessage("Failed to play the stream.");
+    if (message) {
+      flashMessage(message);
+    }
+    if (!message && !audio.error || audio.error.code !== MediaError.MEDIA_ERR_ABORTED) {
+      flashMessage("Couldn't play; please try again");
     }
     this.player.state = this.player.states.stopped;
     audio = null;
@@ -135,6 +141,14 @@ angular.module("player").controller("PlayerCtrl", function (
     audio.addEventListener("playing", playingListener);
     audio.addEventListener("error", errorListener);
     this.player.state = this.player.states.buffering;
+    let timeoutInterval = setTimeout(errorListener, TIMEOUT);
+    // Some mobile browsers refuse to play() the stream unless the action was initiated
+    // by the user themselves; in such a case, audio.paused will be true just after calling
+    // audio.play(). We can check this to fail early and tell the user to try again.
+    if (audio.paused) {
+      errorListener("Tap the Play button to play");
+      clearInterval(timeoutInterval);
+    }
   };
 
   ///////////////////////////////////////////////////////////////////////////////////////////////
