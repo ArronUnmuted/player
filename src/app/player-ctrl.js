@@ -105,7 +105,7 @@ angular.module("player").controller("PlayerCtrl", function (
     playing: 2,
   };
   this.player.state = this.player.states.stopped;
-
+  let timeoutIntervalRef;
   let errorListener = (message) => {
     /* global MediaError */
     if (message) {
@@ -120,6 +120,7 @@ angular.module("player").controller("PlayerCtrl", function (
   };
   let playingListener = () => {
     this.player.state = this.player.states.playing;
+    clearInterval(timeoutIntervalRef);
     $scope.$apply();
   };
 
@@ -141,13 +142,13 @@ angular.module("player").controller("PlayerCtrl", function (
     audio.addEventListener("playing", playingListener);
     audio.addEventListener("error", errorListener);
     this.player.state = this.player.states.buffering;
-    let timeoutInterval = setTimeout(errorListener, TIMEOUT);
+    timeoutIntervalRef = setTimeout(errorListener, TIMEOUT);
     // Some mobile browsers refuse to play() the stream unless the action was initiated
     // by the user themselves; in such a case, audio.paused will be true just after calling
     // audio.play(). We can check this to fail early and tell the user to try again.
     if (audio.paused) {
       errorListener("Tap the Play button to play");
-      clearInterval(timeoutInterval);
+      clearInterval(timeoutIntervalRef);
     }
   };
 
