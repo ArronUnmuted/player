@@ -1,0 +1,66 @@
+.box {
+    border: 0;
+    border-radius: 0;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-top: 0;
+    margin-left: -16px;
+    margin-right: -16px;
+    margin-bottom: 0;
+    flex: none;
+    display: flex;
+    overflow: hidden;
+}
+
+.box-valign-center,
+.box-error {
+    align-items: center;
+}
+
+.box-central {
+    flex-direction: column;
+}
+
+.box-central,
+.box-loading,
+.box-error {
+    flex: 2;
+    justify-content: center;
+}
+
+.box-loading svg {
+    align-self: center;
+}
+
+.box-error {
+    font-size: 25px;
+    @media screen and (max-height: 100px) {
+        font-size: 18px;
+    }
+}
+
+.box-dark {
+    background-color: #607D8B;
+    color: white;
+}
+
+.box-light {
+    background-color: white;
+    color: #212121;
+}
+
+.box-action-bar,
+.box-bottom-bar,
+.box-last-songs {
+    min-height: 50px;
+}
+
+.box-action-bar {
+    justify-content: flex-end;
+}
+
+.box-last-songs {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+}

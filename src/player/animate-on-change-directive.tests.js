@@ -1,11 +1,11 @@
-/* global describe, module, inject, it, expect, beforeEach, spyOn, jasmine */
+/* global angular, inject */
 
 describe("animateOnChange directive", function () {
 
   let compiledElement;
   let template = '<p><span animate-on-change="testVar"></span></p>';
 
-  beforeEach(module("player"));
+  beforeEach(angular.mock.module("player"));
   beforeEach(inject(function ($rootScope, $compile) {
     this.scope = $rootScope.$new();
     this.scope.testVar = "first";

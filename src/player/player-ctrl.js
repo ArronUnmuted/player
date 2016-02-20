@@ -1,5 +1,5 @@
-/* global angular */
-angular.module("player").controller("PlayerCtrl", function (
+/* global io */
+export default /*@ngInject*/ function PlayerCtrl(
   $rootScope,
   $timeout,
   $location,
@@ -193,4 +193,4 @@ angular.module("player").controller("PlayerCtrl", function (
 
   const fallbackImageUrl = "https://photon.shoutca.st/cdn.shoutca.st/noalbum.png?w=200";
   this.fallbackImageUrl = fallbackImageUrl;
-});
+}

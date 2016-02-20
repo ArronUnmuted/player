@@ -1,4 +1,4 @@
-angular.module("player").directive("messageEvent", ($window) => {
+export default /*@ngInject*/ ($window) => {
   return {
     link(scope) {
       $window.addEventListener("message", ({ origin = "", data = {}} = {}) => {
@@ -16,4 +16,4 @@ angular.module("player").directive("messageEvent", ($window) => {
       });
     },
   };
-});
+};

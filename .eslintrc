@@ -1,11 +1,6 @@
 {
-    // Rules:
-    // 0 means disabled
-    // 1 means to consider issues as warnings
-    // 2 means to consider issues as errors (exit status 1)
-
+    "parser": "babel-eslint",
     "rules": {
-        // Clean code and best practices
         "indent": [2, 2, { "SwitchCase": 1 }],
         "quotes": [2, "double", "avoid-escape"],
         "linebreak-style": [2, "unix"],
@@ -28,7 +23,6 @@
         "no-extra-boolean-cast": 1,
         "no-with": 2,
 
-        // Consistent and widely-accepted style conventions
         "brace-style": [2, "1tbs", { "allowSingleLine": true }],
         "camelcase": [2, { "properties": "always" }],
         "comma-spacing": [2, {
@@ -67,7 +61,6 @@
             "exceptions": ["-", "+", "/", "@ngInject"]
         }],
 
-        // Possible errors
         "no-cond-assign": 2,
         "no-unreachable": 2,
         "use-isnan": 2,
@@ -83,27 +76,27 @@
         "no-sequences": 2,
         "no-throw-literal": 2,
 
-        // NodeJS specific things
         "callback-return": [2, ["callback", "cb", "next"]],
         "handle-callback-err": [2, "^(err|error)$" ],
         "no-new-require": 2,
-        "no-sync": 0
+        "no-sync": 0,
+
+        "import/no-require": 0
     },
 
-    // Environments
     "env": {
         "node": true,
         "browser": true,
+        "commonjs": true,
         "jasmine": true,
         "es6": true
     },
 
-    // Global variables
     "globals": {
-        "angular": true,
-        "io": true
+        "IS_PRODUCTION": true,
+        "API_ENDPOINT": true
     },
 
-    // Extend the default recommended configuration
-    "extends": "eslint:recommended"
+    "import/resolver": "webpack",
+    "extends": ["eslint:recommended", "import/warnings", "import/es7-jsx"]
 }
