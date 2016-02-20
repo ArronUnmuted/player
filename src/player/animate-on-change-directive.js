@@ -1,4 +1,4 @@
-angular.module("player").directive("animateOnChange", ($animate, $timeout) => {
+export default /*@ngInject*/ ($animate, $timeout) => {
   return (scope, element, attr) => {
     scope.$watch(attr.animateOnChange, (newValue, oldValue) => {
       if (newValue === oldValue) {
@@ -9,4 +9,4 @@ angular.module("player").directive("animateOnChange", ($animate, $timeout) => {
       });
     });
   };
-});
+};

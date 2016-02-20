@@ -1,9 +1,9 @@
-/* global describe, module, inject, it, expect, beforeEach, jasmine */
+/* global angular, inject */
 
 describe("PlayerCtrl", function () {
   let scope;
   let _noop = () => {};
-  beforeEach(module("player"));
+  beforeEach(angular.mock.module("player"));
   beforeEach(inject(function ($rootScope, $controller) {
     // noop for socket.io
     window.io = {

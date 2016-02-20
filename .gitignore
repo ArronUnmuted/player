@@ -2,6 +2,6 @@
 __MACOSX/
 .tmp/
 *~
-dev/
 node_modules/
-src/libs/
+dist/
+.webpack-records.json

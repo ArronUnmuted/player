@@ -1,7 +1,7 @@
-/* global describe, module, inject, it, expect, beforeEach, spyOn, jasmine */
+/* global angular, inject */
 
 describe("ConfigService", function () {
-  beforeEach(module("player"));
+  beforeEach(angular.mock.module("player"));
   beforeEach(inject(function (ConfigService, $httpBackend) {
     this.service = ConfigService;
     this.$httpBackend = $httpBackend;

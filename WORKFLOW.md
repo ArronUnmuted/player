@@ -1,47 +1,42 @@
 ## Initial setup
 
-After cloning the repository, run `grunt install-hook` to set up the
-git hooks. This is used to maintain the codebase quality.
+After cloning the repository, run `npm install` to install all dependencies.
 
 ## Working on the code
 
-The source is located in src/app. File names are in lowercase and
+The source is located in src/. File names are in lowercase and
 are separated by hyphens. They all have a suffix attached when applicable;
 for instance, controllers have a -ctrl suffix, services have -service, and so on.
 
 When adding new code or fixing bugs, consider also improving and/or adding tests.
 Unit test files have a .tests.js suffix.
 
-Use `grunt dev` to start a dev server on localhost:4000.
-It will serve Player and automatically reload on changes.
+Use `npm start` to start a dev server on localhost:9100.
+The port can be overridden by setting the PORT environment variable.
+The server will serve Player and automatically reload on changes.
 
 ## Committing
 
-A fork workflow is used for Player, so you won't directly work in Player's repo.
-You'll work on your fork of the Player repository.
+A fork workflow is used for Player, so most of the time,
+you won't directly work in Player's repo. You'll work on your fork of the repository,
+except for quick fixes and small changes that really don't need a pull request.
 
 **IMPORTANT**: Before committing, check out a new branch and give it a descriptive name,
-such as `feature/now-playing`, `hotfix/config-loading`, or `code-cleanup`.
+such as `now-playing-feature`, `config-loading-fix`, or `code-cleanup`.
 
 Commit regularily and avoid making huge, monolithic commits. And please,
 write good and descriptive commit messages.
 A good commit message should describe what the commit does.
 
-Before committing, test your code with `grunt test` and also by using the player.
+Before committing, test your code with `npm test` and also by using the app.
 *Make sure it works before continuing.*
 
 When you're done with your commits, push them to your repo.
 
 When you think that your changes are ready to be merged into master,
-open a pull/merge request to get your changes reviewed and merged.
+open a pull request to get your changes reviewed and merged.
 
 ## Releasing to production
 
-```
-git checkout production
-git merge master
-git push
-```
-
-Yes. That's it. Any pushes to production will automatically trigger
-a build and a deploy to production.
+When a branch gets merged or a commit is made on master, a build server
+will automatically run tests, build the app, and deploy it in production.

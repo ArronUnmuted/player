@@ -1,5 +1,0 @@
-#!/bin/sh
-
-set -x
-
-ln -s -i ../../scripts/pre-commit-hook .git/hooks/pre-commit
