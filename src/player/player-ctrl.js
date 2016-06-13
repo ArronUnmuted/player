@@ -125,7 +125,7 @@ export default /*@ngInject*/ function PlayerCtrl(
   };
 
   this.player.toggle = (streamUrl) => {
-    if (this.player.state === this.player.states.buffering) {
+    if (this.player.state === this.player.states.buffering || this.shouldFlashMessage) {
       return;
     }
     if (this.player.state === this.player.states.playing && audio !== null) {

@@ -43,7 +43,7 @@
     <span class="long-text" animate-on-change="ctrl.bottomBarMessage"><span ng-show="ctrl.shouldFlashMessage"><i class="fa fa-warning"></i>&nbsp;</span>{{ctrl.bottomBarMessage}}</span>
   </span>
 
-  <button title="Click to play/stop the stream" type="button" class="play-stop-button" ng-click="ctrl.player.toggle(ctrl.config.streamUrl)"><i class="fa" ng-class="{'fa-play': (ctrl.player.state === ctrl.player.states.stopped || ctrl.player.state === ctrl.player.states.buffering), 'fa-stop': (ctrl.player.state === ctrl.player.states.playing), 'slow-flash': (ctrl.player.state === ctrl.player.states.buffering)}" ng-style="{color: ctrl.config.tint}"></i></button>
+  <button title="Click to play/stop the stream" type="button" class="play-stop-button" ng-click="ctrl.player.toggle(ctrl.config.streamUrl)" ng-hide="ctrl.shouldFlashMessage"><i class="fa" ng-class="{'fa-play': (ctrl.player.state === ctrl.player.states.stopped || ctrl.player.state === ctrl.player.states.buffering), 'fa-stop': (ctrl.player.state === ctrl.player.states.playing), 'slow-flash': (ctrl.player.state === ctrl.player.states.buffering)}" ng-style="{color: ctrl.config.tint}"></i></button>
 </div>
 
 <!-- Last songs -->
