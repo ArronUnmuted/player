@@ -159,14 +159,18 @@ export default /*@ngInject*/ function PlayerCtrl(
   let flashMessage = (message, durationInSeconds = 5) => {
     this.bottomBarMessage = message;
     this.shouldFlashMessage = true;
-    $timeout(initBottomBarMessage, durationInSeconds * 1000);
+    $timeout(() => {
+      this.bottomBarMessage = (this.songs[0]) ? formatSong(this.songs[0]) : "";
+      this.shouldFlashMessage = false;
+    }, durationInSeconds * 1000);
   };
 
   let formatSong = ({ artist, song } = {}) => `${artist} - ${song}`;
 
   let initBottomBarMessage = () => {
-    this.bottomBarMessage = (this.songs[0]) ? formatSong(this.songs[0]) : "";
-    this.shouldFlashMessage = false;
+    if (!this.shouldFlashMessage) {
+      this.bottomBarMessage = (this.songs[0]) ? formatSong(this.songs[0]) : "";
+    }
   };
 
   let socket = io.connect("https://np-rt.innovatete.ch/");
