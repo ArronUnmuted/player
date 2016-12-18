@@ -21,7 +21,6 @@
     flex-direction: column;
 }
 
-.box-central,
 .box-loading,
 .box-error {
     flex: 2;

@@ -34,14 +34,18 @@
     .box-central {
         display: none;
     }
-    .album-art:last-child { display: none; }
+    .album-art-row .album-art-col:last-child {
+        display: none;
+    }
 }
 
-@media screen and (min-height: 300px){
-    .album-art:first-child { display: none; }
+@media screen and (min-height: 300px) {
+    .album-art-row .album-art-col:first-child {
+        display: none;
+    }
 }
 
-@media screen and (max-height: 499px) {
+@media screen and (min-height: 300px) and (max-height: 499px) {
     .box-action-bar,
     .logo {
         display: none;
@@ -49,7 +53,7 @@
 
     .current-album-art {
         max-width: 300px;
-        max-height: 300px;
+        max-height: 170px;
     }
 }
 
@@ -61,11 +65,7 @@
     }
     .current-album-art {
         max-width: 300px;
-        max-height: 300px;
-    }
-    .album-art {
-        max-width: 100px;
-        max-height: 100px;
+        max-height: 200px;
     }
     .box-last-songs {
         padding-top: 30px;
@@ -76,8 +76,8 @@
         max-width: 300px;
         max-height: 300px;
         display: block;
-        margin-top: 30px;
-        margin-bottom: 30px;
+        margin-top: 10px;
+        margin-bottom: 10px;
     }
     .box-central .logo-container img,
     .box-central .current-art-container img {
@@ -85,15 +85,28 @@
     }
     .box-central .current-art-container {
         flex: 1;
-        max-width: 150px;
-        max-height: 150px;
+        max-width: 40%;
+        max-height: 30%;
         display: block;
-        margin-bottom: 30px;
+        margin-bottom: 10px;
     }
     .logo {
-        max-height: 7em;
+        max-height: 3em;
     }
     .logo.square {
         width: auto !important;
+    }
+}
+
+@media screen and (min-height: 600px) {
+    .box-central .logo-container {
+        margin-bottom: 30px;
+    }
+    .box-central .current-art-container {
+        margin-bottom: 30px;
+    }
+    .current-album-art {
+        max-width: 300px;
+        max-height: 400px;
     }
 }
