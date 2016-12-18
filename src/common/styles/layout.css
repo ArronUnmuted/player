@@ -64,8 +64,8 @@
         min-height: 60px;
     }
     .current-album-art {
-        max-width: 300px;
         max-height: 200px;
+        width: auto !important;
     }
     .box-last-songs {
         padding-top: 30px;
@@ -92,6 +92,7 @@
     }
     .logo {
         max-height: 3em;
+        width: auto !important;
     }
     .logo.square {
         width: auto !important;
@@ -106,7 +107,7 @@
         margin-bottom: 30px;
     }
     .current-album-art {
-        max-width: 300px;
-        max-height: 400px;
+        max-height: 300px;
+        width: auto !important;
     }
 }
