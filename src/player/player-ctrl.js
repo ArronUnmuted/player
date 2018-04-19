@@ -106,6 +106,16 @@ export default /*@ngInject*/ function PlayerCtrl(
   };
   this.player.state = this.player.states.stopped;
   let timeoutIntervalRef;
+
+  let stopPlayer = () => {
+    audio.removeEventListener("playing", playingListener);
+    audio.removeEventListener("error", errorListener);
+    audio.pause();
+    audio.src = "";
+    audio = null;
+    this.player.state = this.player.states.stopped;
+  };
+
   let errorListener = (message) => {
     /* global MediaError */
     if (message) {
@@ -114,8 +124,7 @@ export default /*@ngInject*/ function PlayerCtrl(
     if (!message && !audio.error || audio.error.code !== MediaError.MEDIA_ERR_ABORTED) {
       flashMessage("Couldn't play; please try again");
     }
-    this.player.state = this.player.states.stopped;
-    audio = null;
+    stopPlayer();
     $scope.$apply();
   };
   let playingListener = () => {
@@ -129,12 +138,7 @@ export default /*@ngInject*/ function PlayerCtrl(
       return;
     }
     if (this.player.state === this.player.states.playing && audio !== null) {
-      audio.removeEventListener("playing", playingListener);
-      audio.removeEventListener("error", errorListener);
-      audio.pause();
-      audio.src = "";
-      audio = null;
-      this.player.state = this.player.states.stopped;
+      stopPlayer();
       return;
     }
     audio = new Audio(streamUrl);
