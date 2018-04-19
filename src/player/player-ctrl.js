@@ -95,7 +95,7 @@ export default /*@ngInject*/ function PlayerCtrl(
   ///////////////////////////////////////////////////////////////////////////////////////////////
 
   const ONE_SECOND = 1000;
-  const TIMEOUT = 5 * ONE_SECOND;
+  const TIMEOUT = 20 * ONE_SECOND;
 
   let audio;
   this.player = {};
