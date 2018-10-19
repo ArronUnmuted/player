@@ -47,9 +47,12 @@ export default /*@ngInject*/ function PlayerCtrl(
 
   this.state = this.states.loading;
 
-  let initialise = this.initialise = (config) => {
+  let initialise = this.initialise = (config, streamUrl) => {
     this.state = this.states.loaded;
     this.config = config;
+    if (!this.config.streamUrl) {
+      this.config.streamUrl = streamUrl;
+    }
     this.theme = this.getTheme(this.config.backgroundColour);
     if (typeof this.config.logo === "string") {
       if (this.config.logo.indexOf("photon.shoutca.st") === -1) {
@@ -86,7 +89,9 @@ export default /*@ngInject*/ function PlayerCtrl(
 
   let username = $location.search().username;
 
-  ConfigService.getConfig(username).then(initialise, () => this.state = this.states.error);
+  ConfigService.getTunein(username).then((data)=>{
+    ConfigService.getConfig(username).then((config) => initialise(config, data.streamUrl), () => this.state = this.states.error);
+  }, () => this.state = this.states.error);
 
   $scope.$on("message::reloadConfig", (event, config) => initialise(config));
 
