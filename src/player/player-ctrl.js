@@ -184,6 +184,11 @@ export default /*@ngInject*/ function PlayerCtrl(
   socket.emit("subscribe", username);
   socket.on("metadata", (songs) => {
     this.songs = songs;
+    for (let song of songs) {
+      if (song.cover.indexOf("photon.shoutca.st") === -1) {
+        song.cover = song.cover.replace(/http(s)?:\/\//, "https://photon.shoutca.st/");
+      }
+    }
     initBottomBarMessage();
     $scope.$apply();
   });
